@@ -1,0 +1,19 @@
+version: '3'
+services:
+
+  nawst-api:
+    working_dir: /app
+    build:
+      context: ../
+      dockerfile: ./.docker/Dockerfile.development
+    ports: 
+      - "3000:3000"
+    networks:
+      - development-network
+    volumes:
+      - ../:/app:delegated
+    image: nawst-development
+
+networks:
+    development-network:
+        driver: bridge
