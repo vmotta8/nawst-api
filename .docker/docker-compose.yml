@@ -1,7 +1,9 @@
 version: '3'
-services:
 
+services:
   nawst-api:
+    image: nawst_api:latest
+    container_name: nawst_api
     working_dir: /app
     build:
       context: ../
@@ -9,11 +11,21 @@ services:
     ports: 
       - "3000:3000"
     networks:
-      - development-network
+      - nawst-network
     volumes:
       - ../:/app:delegated
-    image: nawst-development
+
+  nawst-database:
+    image: postgres:latest
+    container_name: nawst_database
+    ports:
+      - "5432:5432"
+    networks:
+      - nawst-network
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
 
 networks:
-    development-network:
-        driver: bridge
+  nawst-network:
+      driver: bridge
