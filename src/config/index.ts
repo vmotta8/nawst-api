@@ -2,6 +2,10 @@
 require('dotenv').config();
 import { Dialect } from 'sequelize/types';
 
+export const ApplicationConfig = {
+  port: +process.env.PORT || 3000,
+};
+
 export const DatabaseConfig = {
   dialect: process.env.DB_DIALECT as Dialect,
   host: process.env.DB_HOST,
